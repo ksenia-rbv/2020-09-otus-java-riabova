@@ -10,27 +10,32 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class TestRunner {
-    public static void main(String[] args) throws Exception {
-        String className = args[0];
-        Class<?> testClass = Class.forName(className);
 
-        Method[] methodsAll = testClass.getDeclaredMethods();
-        Method beforeMethod = Arrays.stream(methodsAll)
-                .filter(method -> method.isAnnotationPresent(Before.class))
-                .findFirst()
-                .orElse(null);
-        Method afterMethod = Arrays.stream(methodsAll)
-                .filter(method -> method.isAnnotationPresent(After.class))
-                .findFirst()
-                .orElse(null);
-        List<Method> testMethods = Arrays.stream(methodsAll)
-                .filter(method -> method.isAnnotationPresent(Test.class))
-                .collect(Collectors.toList());
+    public void run(String className){
+        try {
+            Class<?> testClass = Class.forName(className);
 
-        run(testClass, testMethods, beforeMethod, afterMethod);
+            Method[] methodsAll = testClass.getDeclaredMethods();
+            Method beforeMethod = Arrays.stream(methodsAll)
+                    .filter(method -> method.isAnnotationPresent(Before.class))
+                    .findFirst()
+                    .orElse(null);
+            Method afterMethod = Arrays.stream(methodsAll)
+                    .filter(method -> method.isAnnotationPresent(After.class))
+                    .findFirst()
+                    .orElse(null);
+            List<Method> testMethods = Arrays.stream(methodsAll)
+                    .filter(method -> method.isAnnotationPresent(Test.class))
+                    .collect(Collectors.toList());
+
+            run(testClass, testMethods, beforeMethod, afterMethod);
+        }
+        catch (Exception e){
+            System.out.println("Error during test process: "+ e);
+        }
     }
 
-    private static void run(Class<?> testClass, List<Method> testMethods, Method beforeMethod, Method afterMethod) throws Exception {
+    private void run(Class<?> testClass, List<Method> testMethods, Method beforeMethod, Method afterMethod) throws Exception {
         int errorCounter = 0;
         for (Method testMethod : testMethods) {
             Object testClassInstance = testClass.getConstructor().newInstance();
@@ -41,7 +46,7 @@ public class TestRunner {
         System.out.println(testMethods.size() + " test completed, " + errorCounter + " failed");
     }
 
-    private static boolean run(Object testClassInstance, Method testMethod, Method beforeMethod, Method afterMethod) throws Exception {
+    private boolean run(Object testClassInstance, Method testMethod, Method beforeMethod, Method afterMethod) throws Exception {
         boolean result;
         if (beforeMethod != null) {
             beforeMethod.invoke(testClassInstance);

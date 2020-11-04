@@ -13,11 +13,11 @@ dependencies {
 }
 
 shadowJar {
-    archiveBaseName.set('TestRunner')
+    archiveBaseName.set('TestRunnerApplication')
     archiveVersion.set('0.1')
     archiveClassifier.set('')
     manifest {
-        attributes 'Main-Class': 'ru.otus.TestRunner'
+        attributes 'Main-Class': 'ru.otus.TestRunnerApplication'
     }
 }
 
