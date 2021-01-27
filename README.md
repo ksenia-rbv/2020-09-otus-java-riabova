@@ -11,3 +11,6 @@ riabovakl@nspk.ru
 1. hw01-gradle
 2. hw02-diy-array-list
 3. hw03-reflections
+5. hw05-byteCodes
+6. hw06-atm
+7. hw07-messageHandler

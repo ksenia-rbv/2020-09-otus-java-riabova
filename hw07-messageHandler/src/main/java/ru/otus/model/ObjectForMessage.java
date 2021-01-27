@@ -12,4 +12,15 @@ public class ObjectForMessage {
     public void setData(List<String> data) {
         this.data = data;
     }
+
+    public ObjectForMessage copy() {
+        var copy = new ObjectForMessage();
+        copy.setData(List.copyOf(data));
+        return copy;
+    }
+
+    @Override
+    public String toString() {
+        return (data == null)? "null": data.toString();
+    }
 }
