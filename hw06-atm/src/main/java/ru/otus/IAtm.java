@@ -3,9 +3,9 @@ package ru.otus;
 import java.util.Map;
 
 public interface IAtm {
-    void putCash(Map<Integer, Integer> cash);
+    void putCash(Map<Bill, Integer> cash);
 
-    Map<Integer, Integer> getCash(int sum);
+    Map<Bill, Integer> getCash(int sum) throws AtmException;
 
     int getBalance();
 }
