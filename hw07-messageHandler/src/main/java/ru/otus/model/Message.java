@@ -1,6 +1,6 @@
 package ru.otus.model;
 
-public class Message {
+public class Message implements Cloneable{
     private final long id;
     private final String field1;
     private final String field2;
@@ -237,10 +237,11 @@ public class Message {
         }
     }
 
-    public Message copy() {
+    @Override
+    public Message clone() {
         if (field13 == null) {
             return this;
         }
-        return this.toBuilder().field13(this.field13.copy()).build();
+        return this.toBuilder().field13(this.field13.clone()).build();
     }
 }

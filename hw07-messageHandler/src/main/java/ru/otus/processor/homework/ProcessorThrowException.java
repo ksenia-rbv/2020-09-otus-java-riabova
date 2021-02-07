@@ -7,9 +7,12 @@ import java.time.Clock;
 import java.time.LocalDateTime;
 
 public class ProcessorThrowException implements Processor {
-    private Clock clock = Clock.systemUTC();
+    private final Clock clock;
 
-    void setClock(Clock clock) {
+    public ProcessorThrowException(){
+        this.clock = Clock.systemUTC();
+    }
+    public ProcessorThrowException(Clock clock){
         this.clock = clock;
     }
 

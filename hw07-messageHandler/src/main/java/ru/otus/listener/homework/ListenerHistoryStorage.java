@@ -2,7 +2,6 @@ package ru.otus.listener.homework;
 
 import ru.otus.listener.Listener;
 import ru.otus.model.Message;
-import ru.otus.model.ObjectForMessage;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -13,7 +12,7 @@ public class ListenerHistoryStorage implements Listener {
 
     @Override
     public void onUpdated(Message oldMsg, Message newMsg) {
-        var record = new Record(oldMsg.copy(), newMsg.copy());
+        var record = new Record(oldMsg.clone(), newMsg.clone());
         historyStorage.add(record);
     }
 

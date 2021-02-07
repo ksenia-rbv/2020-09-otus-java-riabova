@@ -13,12 +13,6 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ProcessorThrowExceptionTest {
-    private ProcessorThrowException processorThrowException;
-
-    @BeforeEach
-    void init() {
-        processorThrowException = new ProcessorThrowException();
-    }
 
     @Test
     void testProcessThrownAssertionInEvenSecond() {
@@ -27,7 +21,7 @@ class ProcessorThrowExceptionTest {
                 .build();
 
         Clock clockEvenSecond = Clock.fixed(Instant.parse("2007-12-03T10:15:30.00Z"), UTC);
-        processorThrowException.setClock(clockEvenSecond);
+        ProcessorThrowException processorThrowException = new ProcessorThrowException(clockEvenSecond);
         Exception exception = assertThrows(RuntimeException.class, () -> {
             processorThrowException.process(message);
         });
@@ -41,7 +35,7 @@ class ProcessorThrowExceptionTest {
                 .build();
 
         Clock clockOddSecond = Clock.fixed(Instant.parse("2007-12-03T10:15:31.00Z"), UTC);
-        processorThrowException.setClock(clockOddSecond);
+        ProcessorThrowException processorThrowException = new ProcessorThrowException(clockOddSecond);
         assertDoesNotThrow(() -> processorThrowException.process(message));
     }
 }
