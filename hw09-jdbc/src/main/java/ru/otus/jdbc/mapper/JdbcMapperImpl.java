@@ -122,4 +122,8 @@ public class JdbcMapperImpl<T> implements JdbcMapper<T> {
             return null;
         };
     }
+
+    public SessionManagerJdbc getSessionManager() {
+        return sessionManager;
+    }
 }
