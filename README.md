@@ -16,3 +16,5 @@ riabovakl@nspk.ru
 6. hw06-atm
 7. hw07-messageHandler
 8. hw08-json
+9. hw09-jdbc
+10. hw10-hibernate
