@@ -1,0 +1,46 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Клиенты</title>
+</head>
+
+<body>
+<h2>Работа с клиентами</h2>
+<form action="api/client" method="post">
+    <label>
+        name
+        <input type="text" name="name" value="">
+    </label>
+    <label>
+        address
+        <input type="text" name="address" value="">
+    </label>
+    <label>
+        phones
+        <input type="text" name="phones" value="">
+    </label>
+    <br/>
+    <br/>
+    <input type="submit" value="Добавить клиента">
+</form>
+
+<h4>Список клиентов</h4>
+<#list clients>
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Phones</th>
+    </tr>
+    <#items as clients>
+    <tr class="${clients?item_parity}Row">
+        <td>${clients.id}
+        <td>${clients.name}
+        <td>${clients.address}
+        <td>${clients.phones}
+        </#items>
+</table>
+</#list>
+
+</body>
+</html>
