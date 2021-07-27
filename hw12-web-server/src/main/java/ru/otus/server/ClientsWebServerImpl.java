@@ -1,6 +1,5 @@
 package ru.otus.server;
 
-import com.google.gson.Gson;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.HandlerList;
@@ -9,7 +8,6 @@ import org.eclipse.jetty.servlet.FilterHolder;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import ru.otus.crm.service.DBServiceClient;
-import ru.otus.dao.UserDao;
 import ru.otus.helpers.FileSystemHelper;
 import ru.otus.services.TemplateProcessor;
 import ru.otus.services.UserAuthService;
@@ -26,22 +24,16 @@ public class ClientsWebServerImpl implements ClientsWebServer {
     private static final String COMMON_RESOURCES_DIR = "static";
 
     private final UserAuthService authService;
-    private final UserDao userDao;
     private final DBServiceClient dbServiceClient;
-    private final Gson gson;
     protected final TemplateProcessor templateProcessor;
     private final Server server;
 
     public ClientsWebServerImpl(int port,
                                 UserAuthService authService,
-                                UserDao userDao,
                                 DBServiceClient dbServiceClient,
-                                Gson gson,
                                 TemplateProcessor templateProcessor) {
         this.authService = authService;
-        this.userDao = userDao;
         this.dbServiceClient = dbServiceClient;
-        this.gson = gson;
         this.templateProcessor = templateProcessor;
         server = new Server(port);
     }

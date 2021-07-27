@@ -1,27 +1,33 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Клиенты</title>
+    <script>
+        function addClient() {
+            const nameTextBox = document.getElementById('nameTextBox');
+            const addressTextBox = document.getElementById('addressTextBox');
+            const phonesTextBox = document.getElementById('phonesTextBox');
+            const addedClientId = document.getElementById('addedClientId');
+
+            fetch('api/client', {
+                method: 'post',
+                headers: {'Content-Type':'application/x-www-form-urlencoded'},
+                body: 'name=' + nameTextBox.value + '&address=' + addressTextBox.value + '&phones=' + phonesTextBox.value
+            })
+                .then(response => response.text())
+                .then(id => addedClientId.innerHTML = 'Добавлен новый клиент с id:' + id);
+        }
+    </script>
 </head>
 
 <body>
 <h2>Работа с клиентами</h2>
-<form action="api/client" method="post">
-    <label>
-        name
-        <input type="text" name="name" value="">
-    </label>
-    <label>
-        address
-        <input type="text" name="address" value="">
-    </label>
-    <label>
-        phones
-        <input type="text" name="phones" value="">
-    </label>
-    <br/>
-    <br/>
-    <input type="submit" value="Добавить клиента">
-</form>
+<h4>Добавить нового пользователя</h4>
+<input type="text" id = "nameTextBox" placeholder="Name">
+<input type="text" id = "addressTextBox" placeholder="Address">
+<input type="text" id = "phonesTextBox" placeholder="Phones">
+<br/>
+<button onclick="addClient()">Добавить</button>
+<pre id = "addedClientId"></pre>
 
 <h4>Список клиентов</h4>
 <#list clients>

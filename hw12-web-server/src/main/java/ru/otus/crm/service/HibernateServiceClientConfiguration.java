@@ -9,12 +9,10 @@ import ru.otus.crm.model.AddressDataSet;
 import ru.otus.crm.model.Client;
 import ru.otus.crm.model.PhoneDataSet;
 
-import java.util.List;
-
-public class HibernateServiceClientInitializer {
+public class HibernateServiceClientConfiguration {
     private static final String HIBERNATE_CFG_FILE = "hibernate.cfg.xml";
 
-    public static DBServiceClient getDbServiceClient() {
+    public DBServiceClient getDbServiceClient() {
         var configuration = new Configuration().configure(HIBERNATE_CFG_FILE);
 
         var dbUrl = configuration.getProperty("hibernate.connection.url");
@@ -31,13 +29,6 @@ public class HibernateServiceClientInitializer {
         var clientTemplate = new DataTemplateHibernate<>(Client.class);
 
         return new DbServiceClientImpl(transactionManager, clientTemplate);
-    }
-
-    public static void init(DBServiceClient dbServiceClient) {
-        dbServiceClient.saveClient(new Client("client1",
-                new AddressDataSet("One"), List.of(new PhoneDataSet("111"))));
-        dbServiceClient.saveClient(new Client("client2",
-                new AddressDataSet("Two"), List.of(new PhoneDataSet("222"))));
     }
 
 }

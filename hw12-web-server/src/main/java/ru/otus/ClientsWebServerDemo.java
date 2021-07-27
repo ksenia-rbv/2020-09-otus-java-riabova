@@ -1,8 +1,10 @@
 package ru.otus;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import ru.otus.crm.model.AddressDataSet;
+import ru.otus.crm.model.Client;
+import ru.otus.crm.model.PhoneDataSet;
 import ru.otus.crm.service.DBServiceClient;
+import ru.otus.crm.service.HibernateServiceClientConfiguration;
 import ru.otus.dao.InMemoryUserDao;
 import ru.otus.dao.UserDao;
 import ru.otus.server.ClientsWebServer;
@@ -12,8 +14,7 @@ import ru.otus.services.TemplateProcessorImpl;
 import ru.otus.services.UserAuthService;
 import ru.otus.services.UserAuthServiceImpl;
 
-import static ru.otus.crm.service.HibernateServiceClientInitializer.getDbServiceClient;
-import static ru.otus.crm.service.HibernateServiceClientInitializer.init;
+import java.util.List;
 
 /*
     // Стартовая страница
@@ -24,18 +25,24 @@ public class ClientsWebServerDemo {
     private static final String TEMPLATES_DIR = "/templates/";
 
     public static void main(String[] args) throws Exception {
-        DBServiceClient dbServiceClient = getDbServiceClient();
-        init(dbServiceClient);
+        DBServiceClient dbServiceClient = new HibernateServiceClientConfiguration().getDbServiceClient();
+        dbDemoInit(dbServiceClient);
 
         UserDao userDao = new InMemoryUserDao();
-        Gson gson = new GsonBuilder().serializeNulls().setPrettyPrinting().create();
         TemplateProcessor templateProcessor = new TemplateProcessorImpl(TEMPLATES_DIR);
         UserAuthService authService = new UserAuthServiceImpl(userDao);
 
         ClientsWebServer clientsWebServer = new ClientsWebServerImpl(WEB_SERVER_PORT,
-                authService, userDao, dbServiceClient, gson, templateProcessor);
+                authService, dbServiceClient, templateProcessor);
 
         clientsWebServer.start();
         clientsWebServer.join();
+    }
+
+    private static void dbDemoInit(DBServiceClient dbServiceClient) {
+        dbServiceClient.saveClient(new Client("client1",
+                new AddressDataSet("One"), List.of(new PhoneDataSet("111"))));
+        dbServiceClient.saveClient(new Client("client2",
+                new AddressDataSet("Two"), List.of(new PhoneDataSet("222"))));
     }
 }
