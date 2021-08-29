@@ -20,3 +20,4 @@ riabovakl@nspk.ru
 10. hw10-hibernate
 11. hw11-cache-engine
 12. hw12-web-server
+13. hw12-ioc-container
