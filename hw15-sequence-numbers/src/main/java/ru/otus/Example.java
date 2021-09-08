@@ -1,13 +1,14 @@
 package ru.otus;
 
+import java.util.concurrent.CyclicBarrier;
+
 public class Example {
 
-    private final static Object monitor = new Object();
-
     public static void main(String[] args) {
-        ExampleThread exampleThread1 = new ExampleThread("Thread1", monitor);
-        ExampleThread exampleThread2 = new ExampleThread("Thread2", monitor);
-        exampleThread1.start();
+        CyclicBarrier cyclicBarrier = new CyclicBarrier(2);
+        ExampleThread exampleThread2 = new ExampleThread(2, cyclicBarrier);
+        ExampleThread exampleThread1 = new ExampleThread(1, cyclicBarrier);
         exampleThread2.start();
+        exampleThread1.start();
     }
 }
