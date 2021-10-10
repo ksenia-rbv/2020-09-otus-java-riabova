@@ -16,4 +16,6 @@ include 'hw12-web-server'
 include 'hw13-ioc-container:homework'
 include 'hw14-spring-boot'
 include 'hw15-sequence-numbers'
+include 'hw16-message-system:ClientsWebApp'
+include 'hw16-message-system:MessageSystem'
 
