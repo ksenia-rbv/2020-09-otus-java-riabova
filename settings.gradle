@@ -18,4 +18,5 @@ include 'hw14-spring-boot'
 include 'hw15-sequence-numbers'
 include 'hw16-message-system:ClientsWebApp'
 include 'hw16-message-system:MessageSystem'
+include 'hw17-grpc'
 
