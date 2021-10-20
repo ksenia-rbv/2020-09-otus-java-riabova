@@ -12,6 +12,7 @@ riabovakl@nspk.ru
 2. hw02-diy-array-list
 2. hw02-collections
 3. hw03-reflections
+4. hw04-gc
 5. hw05-byteCodes
 6. hw06-atm
 7. hw07-messageHandler
