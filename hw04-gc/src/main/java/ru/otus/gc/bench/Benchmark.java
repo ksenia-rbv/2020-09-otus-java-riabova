@@ -22,6 +22,9 @@ class Benchmark implements BenchmarkMBean {
             if (idx % 2 == 0) {
                 list.removeFirst();
             }
+            if (idx % 10 == 0) {
+                System.out.println("Loop idx: " + idx);
+            }
             Thread.sleep(1000);
         }
     }

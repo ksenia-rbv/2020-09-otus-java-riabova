@@ -7,8 +7,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class StatisticServiceImpl implements StatisticService {
 
-    public static final String YOUNG_REGEX = ".*((Young)|(Copy)|(Scavenge)|(Warmup)).*";
-    public static final String OLD_REGEX = ".*((Old)|(MarkSweep)|(Allocation Rate)).*";
+    public static final String YOUNG_REGEX = ".*((Young)|(Copy)|(Scavenge)|(Warmup)|(ParNew)).*";
+    public static final String OLD_REGEX = ".*((Old)|(MarkSweep)|(Allocation Rate)|(Proactive)).*";
     private final List<GarbageCollectionNotificationInfo> infoList = new CopyOnWriteArrayList<>();
     private boolean outOfMemoryHappen = false;
     private long startTime = 0;

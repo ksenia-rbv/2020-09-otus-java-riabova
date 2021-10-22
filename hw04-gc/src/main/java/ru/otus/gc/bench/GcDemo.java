@@ -20,8 +20,8 @@ public class GcDemo {
         StatisticService statisticService = new StatisticServiceImpl();
         switchOnMonitoring(statisticService);
 
-        int size = 1_000_000;
-        int loopCounter = 1000;
+        int size = 400_000;
+        int loopCounter = 180; // >200 for OutOfMemory
         MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
         ObjectName name = new ObjectName("ru.otus:type=Benchmark");
 
